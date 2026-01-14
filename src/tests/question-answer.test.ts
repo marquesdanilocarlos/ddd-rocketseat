@@ -2,12 +2,14 @@ import { expect, test } from 'vitest'
 import QuestionAnswer from '@/domain/use-cases/question-answer'
 import AnswersRepository from '@/domain/repositories/answers-repository'
 import Answer from '@/domain/entities/answer'
+import UniqueEntityId from '@/core/entities/unique-entity-id'
 
 test('Deve responder uma pergunta', async () => {
   const questionAnswerData = {
-    instructorId: '1',
-    questionId: '1',
+    instructorId: new UniqueEntityId(),
+    questionId: new UniqueEntityId(),
     content: 'Tú é burro?',
+    createdAt: new Date(),
   }
 
   const fakeAnswersRespository: AnswersRepository = {

@@ -1,9 +1,10 @@
 import Answer from '@/domain/entities/answer'
 import AnswersRepository from '@/domain/repositories/answers-repository'
+import UniqueEntityId from '@/core/entities/unique-entity-id'
 
 type QuestionAnswerInput = {
-  instructorId: string
-  questionId: string
+  instructorId: UniqueEntityId
+  questionId: UniqueEntityId
   content: string
 }
 
@@ -14,12 +15,14 @@ type QuestionAnswerOutput = {
 export default class QuestionAnswer {
   constructor(private answersRepository: AnswersRepository) {}
 
-  execute({
-    instructorId,
-    questionId,
-    content,
-  }: QuestionAnswerInput): QuestionAnswerOutput {
-    const answer = new Answer({ content, authorId: instructorId, questionId })
+  execute(input: QuestionAnswerInput): QuestionAnswerOutput {
+    const { instructorId, questionId, content } = input
+
+    const answer = Answer.create({
+      authorId: instructorId,
+      questionId,
+      content,
+    })
 
     return {
       answer,

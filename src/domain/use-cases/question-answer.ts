@@ -1,4 +1,5 @@
 import Answer from '@/domain/entities/answer'
+import AnswersRepository from '@/domain/repositories/answers-repository'
 
 type QuestionAnswerInput = {
   instructorId: string
@@ -11,6 +12,8 @@ type QuestionAnswerOutput = {
 }
 
 export default class QuestionAnswer {
+  constructor(private answersRepository: AnswersRepository) {}
+
   execute({
     instructorId,
     questionId,

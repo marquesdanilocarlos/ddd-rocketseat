@@ -18,9 +18,7 @@ describe('Teste de criação de pergunta', () => {
       title: 'Nova Pergunta',
       content: 'Como funciona isso',
     }
-
     const { question } = await sut.execute(newQuestionData)
-    console.log(inMemoryQuestionsRepository.questions[0])
     expect(question.id).toBeTruthy()
     expect(inMemoryQuestionsRepository.questions[0].id).toEqual(question.id)
   })

@@ -2,7 +2,7 @@ import InMemoryQuestionsRepository from '@/tests/repositories/InMemoryQuestionsR
 import GetQuestionBySlug from '@/domain/forum/application/use-cases/get-question-by-slug'
 import Question from '@/domain/forum/enterprise/entities/question'
 import Slug from '@/domain/forum/enterprise/entities/value-objects/slug'
-import UniqueEntityId from '@/core/entities/unique-entity-id'
+import makeQuestion from '@/tests/factories/make-question'
 
 describe('Consulta de pergunta', () => {
   let inMemoryQuestionsRepository: InMemoryQuestionsRepository
@@ -14,17 +14,12 @@ describe('Consulta de pergunta', () => {
   })
 
   it('Deve obter uma pergunta pelo slug', async () => {
-    const newQuestion: Question = Question.create({
-      authorId: new UniqueEntityId(),
-      title: 'Questão importante',
-      content: 'Porque não funciona?',
-      slug: Slug.create('questao-importante'),
+    const newQuestion: Question = makeQuestion({
+      title: 'Pergunta marota',
+      slug: Slug.create('pergunta-marota'),
     })
-
     await inMemoryQuestionsRepository.create(newQuestion)
-
     const { question } = await sut.execute({ slug: newQuestion.slug })
-
     expect(question.id).toBeTruthy()
     expect(question.slug).toEqual(newQuestion.slug)
   })

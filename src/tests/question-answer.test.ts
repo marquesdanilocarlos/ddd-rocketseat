@@ -1,6 +1,6 @@
-import QuestionAnswer from '@/domain/use-cases/question-answer'
-import AnswersRepository from '@/domain/repositories/answers-repository'
-import Answer from '@/domain/entities/answer'
+import QuestionAnswer from '@/domain/forum/application/use-cases/question-answer'
+import AnswersRepository from '@/domain/forum/application/repositories/answers-repository'
+import Answer from '@/domain/forum/enterprise/entities/answer'
 import UniqueEntityId from '@/core/entities/unique-entity-id'
 
 test('Deve responder uma pergunta', async () => {

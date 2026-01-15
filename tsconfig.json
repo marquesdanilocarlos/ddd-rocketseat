@@ -10,7 +10,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "module": "ESNext",
-    "types": ["vitest/globals"],
+    "types": ["vitest/globals", "node"],
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true
   },

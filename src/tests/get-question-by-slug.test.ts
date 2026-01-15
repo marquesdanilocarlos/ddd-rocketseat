@@ -1,7 +1,6 @@
 import InMemoryQuestionsRepository from '@/tests/repositories/InMemoryQuestionsRepository'
 import GetQuestionBySlug from '@/domain/forum/application/use-cases/get-question-by-slug'
 import Question from '@/domain/forum/enterprise/entities/question'
-import Slug from '@/domain/forum/enterprise/entities/value-objects/slug'
 import makeQuestion from '@/tests/factories/make-question'
 
 describe('Consulta de pergunta', () => {

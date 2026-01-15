@@ -15,11 +15,26 @@ describe('Deleção de pergunta', () => {
 
   it('Deve remover uma pergunta pelo id', async () => {
     const newQuestion: Question = makeQuestion(
-      {},
+      { authorId: new UniqueEntityId('author-sinistro') },
       new UniqueEntityId('to-delete-question'),
     )
     const question = await inMemoryQuestionsRepository.create(newQuestion)
-    await sut.execute({ questionId: question.id })
+    await sut.execute({ authorId: question.authorId, questionId: question.id })
     expect(inMemoryQuestionsRepository.questions).toHaveLength(0)
+  })
+
+  it('Não deve deletar pergunta se o id do autor for diferente', async () => {
+    const newQuestion: Question = makeQuestion(
+      { authorId: new UniqueEntityId('autor-sinistro') },
+      new UniqueEntityId('to-delete-question'),
+    )
+    const question = await inMemoryQuestionsRepository.create(newQuestion)
+
+    expect(async () => {
+      await sut.execute({
+        authorId: new UniqueEntityId('outro-autor'),
+        questionId: question.id,
+      })
+    }).rejects.toBeInstanceOf(Error)
   })
 })

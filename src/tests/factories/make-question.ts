@@ -3,15 +3,20 @@ import Question, {
 } from '@/domain/forum/enterprise/entities/question'
 import UniqueEntityId from '@/core/entities/unique-entity-id'
 import Slug from '@/domain/forum/enterprise/entities/value-objects/slug'
+import { faker } from '@faker-js/faker'
 
 export default function makeQuestion(
-  override: Partial<QuestionProps>,
+  override: Partial<QuestionProps> = {},
+  id?: UniqueEntityId,
 ): Question {
-  return Question.create({
-    authorId: new UniqueEntityId(),
-    title: 'Questão importante',
-    content: 'Porque não funciona?',
-    slug: Slug.create('questao-importante'),
-    ...override,
-  })
+  return Question.create(
+    {
+      authorId: new UniqueEntityId(),
+      title: faker.lorem.sentence(),
+      content: faker.lorem.text(),
+      slug: Slug.create('questao-importante'),
+      ...override,
+    },
+    id,
+  )
 }

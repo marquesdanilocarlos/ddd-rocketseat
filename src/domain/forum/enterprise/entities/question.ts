@@ -6,12 +6,12 @@ import dayjs from 'dayjs'
 
 type QuestionProps = {
   authorId: UniqueEntityId
-  bestAnswerId?: UniqueEntityId
   title: string
   content: string
   slug: Slug
   createdAt: Date
   updatedAt?: Date
+  bestAnswerId?: UniqueEntityId
 }
 
 export default class Question extends Entity<QuestionProps> {

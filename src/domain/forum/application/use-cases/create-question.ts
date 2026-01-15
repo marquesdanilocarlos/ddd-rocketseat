@@ -22,6 +22,7 @@ export default class CreateQuestion {
       title,
       content,
     })
+
     await this.questionsRepository.create(question)
 
     return { question }

@@ -15,14 +15,16 @@ type QuestionAnswerOutput = {
 export default class QuestionAnswer {
   constructor(private answersRepository: AnswersRepository) {}
 
-  execute(input: QuestionAnswerInput): QuestionAnswerOutput {
+  async execute(input: QuestionAnswerInput): Promise<QuestionAnswerOutput> {
     const { instructorId, questionId, content } = input
 
-    const answer = Answer.create({
+    const answer: Answer = Answer.create({
       authorId: instructorId,
       questionId,
       content,
     })
+
+    await this.answersRepository.create(answer)
 
     return {
       answer,

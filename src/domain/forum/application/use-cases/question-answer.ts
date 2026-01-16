@@ -3,8 +3,8 @@ import AnswersRepository from '@/domain/forum/application/repositories/answers-r
 import UniqueEntityId from '@/core/entities/unique-entity-id'
 
 type QuestionAnswerInput = {
-  instructorId: UniqueEntityId
-  questionId: UniqueEntityId
+  instructorId: string
+  questionId: string
   content: string
 }
 
@@ -19,8 +19,8 @@ export default class QuestionAnswer {
     const { instructorId, questionId, content } = input
 
     const answer: Answer = Answer.create({
-      authorId: instructorId,
-      questionId,
+      authorId: new UniqueEntityId(instructorId),
+      questionId: new UniqueEntityId(questionId),
       content,
     })
 

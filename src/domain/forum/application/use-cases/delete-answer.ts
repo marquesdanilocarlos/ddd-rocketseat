@@ -1,9 +1,8 @@
 import AnswersRepository from '@/domain/forum/application/repositories/answers-repository'
-import UniqueEntityId from '@/core/entities/unique-entity-id'
 
 type DeleteAnswerInput = {
-  authorId: UniqueEntityId
-  answerId: UniqueEntityId
+  authorId: string
+  answerId: string
 }
 
 export default class DeleteAnswer {
@@ -16,12 +15,12 @@ export default class DeleteAnswer {
       throw new Error(`A resposta com o id: ${answerId} não foi encontrada`)
     }
 
-    if (authorId !== answer.authorId) {
+    if (authorId !== answer.authorId.value) {
       throw new Error(
         'Não é permitido deleter a resposta de um usuário diferente',
       )
     }
 
-    await this.answersRepository.delete(answerId)
+    await this.answersRepository.delete(answer)
   }
 }

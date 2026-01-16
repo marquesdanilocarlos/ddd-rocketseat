@@ -1,14 +1,17 @@
 import QuestionsRepository from '@/domain/forum/application/repositories/questions-repository'
 
-type DeleteQuestionInput = {
+type EditQuestionInput = {
   authorId: string
   questionId: string
+  title: string
+  content: string
 }
 
-export default class DeleteQuestion {
+export default class EditQuestion {
   constructor(private questionsRepository: QuestionsRepository) {}
 
-  async execute({ authorId, questionId }: DeleteQuestionInput): Promise<void> {
+  async execute(input: EditQuestionInput): Promise<void> {
+    const { authorId, questionId, title, content } = input
     const question = await this.questionsRepository.findById(questionId)
 
     if (!question) {
@@ -17,10 +20,13 @@ export default class DeleteQuestion {
 
     if (authorId !== question.authorId.value) {
       throw new Error(
-        'Não é permitido deleter a pergunta de um usuário diferente',
+        'Não é permitido editar a pergunta de um usuário diferente',
       )
     }
 
-    await this.questionsRepository.delete(question)
+    question.title = title
+    question.content = content
+
+    await this.questionsRepository.save(question)
   }
 }

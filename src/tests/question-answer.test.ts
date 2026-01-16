@@ -13,8 +13,8 @@ describe('Criacão de respostas', () => {
 
   test('Deve responder uma pergunta', async () => {
     const questionAnswerData = {
-      instructorId: new UniqueEntityId(),
-      questionId: new UniqueEntityId(),
+      instructorId: 'instrctor-1',
+      questionId: 'question-1',
       content: 'Deve ser feito assim',
       createdAt: new Date(),
     }

@@ -7,7 +7,7 @@ import { faker } from '@faker-js/faker'
 
 export default function makeQuestion(
   override: Partial<QuestionProps> = {},
-  id?: UniqueEntityId,
+  id?: string,
 ): Question {
   return Question.create(
     {
@@ -17,6 +17,6 @@ export default function makeQuestion(
       slug: Slug.create('questao-importante'),
       ...override,
     },
-    id,
+    new UniqueEntityId(id),
   )
 }

@@ -31,12 +31,12 @@ export default class InMemoryQuestionsRepository implements QuestionsRepository 
     return Promise.resolve(question)
   }
 
-  save(question: Question): Promise<void> {
+  save(question: Question): Promise<Question> {
     const questionIndex = this.questions.findIndex(
       (item) => item.id.value === question.id.value,
     )
 
     this.questions[questionIndex] = question
-    return Promise.resolve()
+    return Promise.resolve(this.questions[questionIndex])
   }
 }

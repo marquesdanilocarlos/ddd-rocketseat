@@ -26,4 +26,13 @@ export default class InMemoryAnswersRepository implements AnswersRepository {
     this.answers.splice(answerIndex, 1)
     return Promise.resolve()
   }
+
+  async save(answer: Answer): Promise<Answer> {
+    const answerIndex = this.answers.findIndex(
+      (item) => item.id.value === answer.id.value,
+    )
+
+    this.answers[answerIndex] = answer
+    return Promise.resolve(this.answers[answerIndex])
+  }
 }

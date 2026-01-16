@@ -1,4 +1,5 @@
 import QuestionsRepository from '@/domain/forum/application/repositories/questions-repository'
+import Question from '@/domain/forum/enterprise/entities/question'
 
 type EditQuestionInput = {
   authorId: string
@@ -7,10 +8,14 @@ type EditQuestionInput = {
   content: string
 }
 
+type EditQuestionOutput = {
+  question: Question
+}
+
 export default class EditQuestion {
   constructor(private questionsRepository: QuestionsRepository) {}
 
-  async execute(input: EditQuestionInput): Promise<void> {
+  async execute(input: EditQuestionInput): Promise<EditQuestionOutput> {
     const { authorId, questionId, title, content } = input
     const question = await this.questionsRepository.findById(questionId)
 
@@ -28,5 +33,7 @@ export default class EditQuestion {
     question.content = content
 
     await this.questionsRepository.save(question)
+
+    return { question }
   }
 }

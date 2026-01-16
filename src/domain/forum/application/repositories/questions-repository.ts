@@ -6,5 +6,5 @@ export default interface QuestionsRepository {
   create(question: Question): Promise<Question>
   findBySlug(slug: Slug): Promise<Question | null>
   delete(question: Question): Promise<void>
-  save(question: Question): Promise<void>
+  save(question: Question): Promise<Question>
 }

@@ -1,6 +1,7 @@
 import QuestionsRepository from '@/domain/forum/application/repositories/questions-repository'
 import Question from '@/domain/forum/enterprise/entities/question'
 import Slug from '@/domain/forum/enterprise/entities/value-objects/slug'
+import PaginationParams from '@/core/types/pagination-params'
 
 export default class InMemoryQuestionsRepository implements QuestionsRepository {
   public questions: Question[] = []
@@ -38,5 +39,12 @@ export default class InMemoryQuestionsRepository implements QuestionsRepository 
 
     this.questions[questionIndex] = question
     return Promise.resolve(this.questions[questionIndex])
+  }
+
+  async findManyRecent({ page }: PaginationParams): Promise<Question[]> {
+    const questions = this.questions
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+      .slice((page - 1) * 20, page * 20)
+    return Promise.resolve(questions)
   }
 }

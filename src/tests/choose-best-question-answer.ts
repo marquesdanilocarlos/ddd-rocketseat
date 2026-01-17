@@ -2,7 +2,7 @@ import InMemoryQuestionsRepository from '@/tests/repositories/InMemoryQuestionsR
 import InMemoryAnswersRepository from '@/tests/repositories/InMemoryAnswersRepository'
 import makeQuestion from '@/tests/factories/make-question'
 import makeAnswer from '@/tests/factories/make-answer'
-import ChooseBestQuestionAnswer from '@/domain/forum/application/use-cases/ChooseBestQuestionAnswer'
+import ChooseBestQuestionAnswer from '@/domain/forum/application/use-cases/choose-best-question-answer'
 import UniqueEntityId from '@/core/entities/unique-entity-id'
 
 describe('Seleção de melhor resposta para uma pergunta', () => {

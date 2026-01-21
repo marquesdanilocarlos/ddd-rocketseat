@@ -3,6 +3,7 @@ import UniqueEntityId from '@/core/entities/unique-entity-id'
 import AnswerComment from '@/domain/forum/enterprise/entities/answer-comment'
 import makeAnswerComment from '@/tests/factories/make-answer-comment'
 import DeleteAnswerComment from '@/domain/forum/application/use-cases/delete-answer-comment'
+import { UnauthorizedError } from '@/core/errors'
 
 describe('Deleção de comentário da resposta', () => {
   let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository
@@ -41,6 +42,6 @@ describe('Deleção de comentário da resposta', () => {
         authorId: 'outro-autor',
         answerCommentId: answerComment.id.value,
       })
-    }).rejects.toBeInstanceOf(Error)
+    }).rejects.toBeInstanceOf(UnauthorizedError)
   })
 })

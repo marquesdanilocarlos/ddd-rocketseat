@@ -1,4 +1,5 @@
 import AnswersRepository from '@/domain/forum/application/repositories/answers-repository'
+import { NotFoundError, UnauthorizedError } from '@/core/errors'
 
 type DeleteAnswerInput = {
   authorId: string
@@ -12,11 +13,13 @@ export default class DeleteAnswer {
     const answer = await this.answersRepository.findById(answerId)
 
     if (!answer) {
-      throw new Error(`A resposta com o id: ${answerId} não foi encontrada`)
+      throw new NotFoundError(
+        `A resposta com o id: ${answerId} não foi encontrada`,
+      )
     }
 
     if (authorId !== answer.authorId.value) {
-      throw new Error(
+      throw new UnauthorizedError(
         'Não é permitido deleter a resposta de um usuário diferente',
       )
     }

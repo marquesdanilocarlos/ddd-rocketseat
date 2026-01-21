@@ -3,6 +3,7 @@ import EditQuestion from '@/domain/forum/application/use-cases/edit-question'
 import Question from '@/domain/forum/enterprise/entities/question'
 import makeQuestion from '@/tests/factories/make-question'
 import UniqueEntityId from '@/core/entities/unique-entity-id'
+import { UnauthorizedError } from '@/core/errors'
 
 describe('Edição de pergunta', () => {
   let inMemoryQuestionsRepository: InMemoryQuestionsRepository
@@ -45,6 +46,6 @@ describe('Edição de pergunta', () => {
         title: 'Novo título',
         content: 'Novo Conteúdo',
       })
-    }).rejects.toBeInstanceOf(Error)
+    }).rejects.toBeInstanceOf(UnauthorizedError)
   })
 })

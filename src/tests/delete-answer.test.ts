@@ -3,6 +3,7 @@ import DeleteAnswer from '@/domain/forum/application/use-cases/delete-answer'
 import UniqueEntityId from '@/core/entities/unique-entity-id'
 import Answer from '@/domain/forum/enterprise/entities/answer'
 import makeAnswer from '@/tests/factories/make-answer'
+import { UnauthorizedError } from '@/core/errors'
 
 describe('Deleção de resposta', () => {
   let inMemoryAnswersRepository: InMemoryAnswersRepository
@@ -38,6 +39,6 @@ describe('Deleção de resposta', () => {
         authorId: 'outro-autor',
         answerId: answer.id.value,
       })
-    }).rejects.toBeInstanceOf(Error)
+    }).rejects.toBeInstanceOf(UnauthorizedError)
   })
 })

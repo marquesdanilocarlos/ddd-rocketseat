@@ -2,6 +2,7 @@ import AnswersRepository from '@/domain/forum/application/repositories/answers-r
 import AnswerCommentsRepository from '@/domain/forum/application/repositories/answer-comments-repository'
 import AnswerComment from '@/domain/forum/enterprise/entities/answer-comment'
 import UniqueEntityId from '@/core/entities/unique-entity-id'
+import { NotFoundError } from '@/core/errors'
 
 export type CommentOnAnswerInput = {
   answerId: string
@@ -24,7 +25,7 @@ export default class CommentOnAnswer {
     const answer = await this.answersRepository.findById(answerId)
 
     if (!answer) {
-      throw new Error('Pergunta não encontrada')
+      throw new NotFoundError('Pergunta não encontrada')
     }
 
     const comment: AnswerComment = AnswerComment.create({

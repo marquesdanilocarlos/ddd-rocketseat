@@ -1,4 +1,5 @@
 import QuestionsRepository from '@/domain/forum/application/repositories/questions-repository'
+import { NotFoundError, UnauthorizedError } from '@/core/errors'
 
 type DeleteQuestionInput = {
   authorId: string
@@ -12,11 +13,13 @@ export default class DeleteQuestion {
     const question = await this.questionsRepository.findById(questionId)
 
     if (!question) {
-      throw new Error(`A pergunta com o id: ${questionId} não foi encontrada`)
+      throw new NotFoundError(
+        `A pergunta com o id: ${questionId} não foi encontrada`,
+      )
     }
 
     if (authorId !== question.authorId.value) {
-      throw new Error(
+      throw new UnauthorizedError(
         'Não é permitido deleter a pergunta de um usuário diferente',
       )
     }

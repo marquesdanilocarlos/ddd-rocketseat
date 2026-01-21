@@ -4,6 +4,7 @@ import makeQuestion from '@/tests/factories/make-question'
 import makeAnswer from '@/tests/factories/make-answer'
 import ChooseBestQuestionAnswer from '@/domain/forum/application/use-cases/choose-best-question-answer'
 import UniqueEntityId from '@/core/entities/unique-entity-id'
+import { UnauthorizedError } from '@/core/errors'
 
 describe('Seleção de melhor resposta para uma pergunta', () => {
   let inMemoryQuestionsRepository: InMemoryQuestionsRepository
@@ -48,6 +49,6 @@ describe('Seleção de melhor resposta para uma pergunta', () => {
         answerId: newAnswer.id.value,
         authorId: 'autor-nao-cabuloso',
       })
-    }).rejects.toBeInstanceOf(Error)
+    }).rejects.toBeInstanceOf(UnauthorizedError)
   })
 })

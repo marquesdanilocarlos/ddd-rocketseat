@@ -3,6 +3,7 @@ import DeleteQuestion from '@/domain/forum/application/use-cases/delete-question
 import Question from '@/domain/forum/enterprise/entities/question'
 import makeQuestion from '@/tests/factories/make-question'
 import UniqueEntityId from '@/core/entities/unique-entity-id'
+import { UnauthorizedError } from '@/core/errors'
 
 describe('Deleção de pergunta', () => {
   let inMemoryQuestionsRepository: InMemoryQuestionsRepository
@@ -38,6 +39,6 @@ describe('Deleção de pergunta', () => {
         authorId: 'outro-autor',
         questionId: question.id.value,
       })
-    }).rejects.toBeInstanceOf(Error)
+    }).rejects.toBeInstanceOf(UnauthorizedError)
   })
 })

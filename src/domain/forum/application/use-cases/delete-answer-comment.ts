@@ -1,4 +1,5 @@
 import AnswerCommentsRepository from '@/domain/forum/application/repositories/answer-comments-repository'
+import { NotFoundError, UnauthorizedError } from '@/core/errors'
 
 type DeleteAnswerCommentInput = {
   authorId: string
@@ -16,13 +17,13 @@ export default class DeleteAnswerComment {
       await this.answerCommentsRepository.findById(answerCommentId)
 
     if (!answerComment) {
-      throw new Error(
+      throw new NotFoundError(
         `O comentário com o id: ${answerCommentId} não foi encontrado`,
       )
     }
 
     if (authorId !== answerComment.authorId.value) {
-      throw new Error(
+      throw new UnauthorizedError(
         'Não é permitido deleter comentário de um usuário diferente',
       )
     }

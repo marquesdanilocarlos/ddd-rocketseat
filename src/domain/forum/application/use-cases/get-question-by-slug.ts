@@ -1,6 +1,7 @@
 import QuestionsRepository from '@/domain/forum/application/repositories/questions-repository'
 import Slug from '@/domain/forum/enterprise/entities/value-objects/slug'
 import Question from '@/domain/forum/enterprise/entities/question'
+import { NotFoundError } from '@/core/errors'
 
 type GetQuestionBySlugInput = {
   slug: Slug
@@ -19,7 +20,7 @@ export default class GetQuestionBySlug {
     const question = await this.questionsRepository.findBySlug(slug)
 
     if (!question) {
-      throw new Error('Pergunta não encontrada!')
+      throw new NotFoundError('Pergunta não encontrada!')
     }
 
     return {

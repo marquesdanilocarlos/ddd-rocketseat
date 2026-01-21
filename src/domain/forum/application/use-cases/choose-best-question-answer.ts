@@ -1,5 +1,6 @@
 import QuestionsRepository from '@/domain/forum/application/repositories/questions-repository'
 import AnswersRepository from '@/domain/forum/application/repositories/answers-repository'
+import { NotFoundError, UnauthorizedError } from '@/core/errors'
 
 type ChooseBestQuestionAnswerInput = {
   answerId: string
@@ -19,7 +20,7 @@ export default class ChooseBestQuestionAnswer {
     const answer = await this.answersRepository.findById(answerId)
 
     if (!answer) {
-      throw new Error('Resposta não encontrada.')
+      throw new NotFoundError('Resposta não encontrada.')
     }
 
     const question = await this.questionsRepository.findById(
@@ -27,11 +28,11 @@ export default class ChooseBestQuestionAnswer {
     )
 
     if (!question) {
-      throw new Error('Pergunta não encontrada.')
+      throw new NotFoundError('Pergunta não encontrada.')
     }
 
     if (question.authorId.value !== authorId) {
-      throw new Error(
+      throw new UnauthorizedError(
         'Não é possível selecionar a melhor resposta para a pergunta com esse autor.',
       )
     }

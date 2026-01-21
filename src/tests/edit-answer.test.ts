@@ -3,6 +3,7 @@ import UniqueEntityId from '@/core/entities/unique-entity-id'
 import Answer from '@/domain/forum/enterprise/entities/answer'
 import makeAnswer from '@/tests/factories/make-answer'
 import EditAnswer from '@/domain/forum/application/use-cases/edit-answer'
+import { UnauthorizedError } from '@/core/errors'
 
 describe('Edição de resposta', () => {
   let inMemoryAnswersRepository: InMemoryAnswersRepository
@@ -42,6 +43,6 @@ describe('Edição de resposta', () => {
         answerId: answer.id.value,
         content: 'Novo conteúdo de resposta',
       })
-    }).rejects.toBeInstanceOf(Error)
+    }).rejects.toBeInstanceOf(UnauthorizedError)
   })
 })

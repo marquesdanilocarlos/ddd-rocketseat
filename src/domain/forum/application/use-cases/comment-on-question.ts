@@ -2,6 +2,7 @@ import QuestionsRepository from '@/domain/forum/application/repositories/questio
 import QuestionCommentsRepository from '@/domain/forum/application/repositories/question-comments-repository'
 import QuestionComment from '@/domain/forum/enterprise/entities/question-comment'
 import UniqueEntityId from '@/core/entities/unique-entity-id'
+import { NotFoundError } from '@/core/errors'
 
 export type CommentOnQuestionInput = {
   questionId: string
@@ -26,7 +27,7 @@ export default class CommentOnQuestion {
     const question = await this.questionsRepository.findById(questionId)
 
     if (!question) {
-      throw new Error('Pergunta não encontrada')
+      throw new NotFoundError('Pergunta não encontrada')
     }
 
     const comment: QuestionComment = QuestionComment.create({

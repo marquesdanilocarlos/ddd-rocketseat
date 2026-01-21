@@ -3,6 +3,7 @@ import UniqueEntityId from '@/core/entities/unique-entity-id'
 import QuestionComment from '@/domain/forum/enterprise/entities/question-comment'
 import makeQuestionComment from '@/tests/factories/make-question-comment'
 import DeleteQuestionComment from '@/domain/forum/application/use-cases/delete-question-comment'
+import { UnauthorizedError } from '@/core/errors'
 
 describe('Deleção de comentário da pergunta', () => {
   let inMemoryQuestionCommentsRepository: InMemoryQuestionCommentsRepository
@@ -42,6 +43,6 @@ describe('Deleção de comentário da pergunta', () => {
         authorId: 'outro-autor',
         questionCommentId: questionComment.id.value,
       })
-    }).rejects.toBeInstanceOf(Error)
+    }).rejects.toBeInstanceOf(UnauthorizedError)
   })
 })

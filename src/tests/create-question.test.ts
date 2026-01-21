@@ -1,7 +1,7 @@
 import CreateQuestion, {
   CreateQuestionInput,
 } from '@/domain/forum/application/use-cases/create-question'
-import InMemoryQuestionsRepository from '@/tests/repositories/InMemoryQuestionsRepository'
+import InMemoryQuestionsRepository from '@/tests/repositories/in-memory-questions-repository'
 
 describe('Teste de criação de pergunta', () => {
   let inMemoryQuestionsRepository: InMemoryQuestionsRepository

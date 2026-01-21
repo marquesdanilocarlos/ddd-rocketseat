@@ -1,5 +1,5 @@
 import makeAnswer from '@/tests/factories/make-answer'
-import InMemoryAnswersRepository from '@/tests/repositories/InMemoryAnswersRepository'
+import InMemoryAnswersRepository from '@/tests/repositories/in-memory-answers-repository'
 import FetchQuestionAnswers from '@/domain/forum/application/use-cases/fetch-question-answers'
 import UniqueEntityId from '@/core/entities/unique-entity-id'
 

@@ -1,6 +1,6 @@
 import QuestionAnswer from '@/domain/forum/application/use-cases/question-answer'
 import UniqueEntityId from '@/core/entities/unique-entity-id'
-import InMemoryAnswersRepository from '@/tests/repositories/InMemoryAnswersRepository'
+import InMemoryAnswersRepository from '@/tests/repositories/in-memory-answers-repository'
 
 describe('Criacão de respostas', () => {
   let inMemoryAnswersRepository: InMemoryAnswersRepository

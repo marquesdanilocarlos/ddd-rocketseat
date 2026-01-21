@@ -1,4 +1,4 @@
-import InMemoryQuestionsRepository from '@/tests/repositories/InMemoryQuestionsRepository'
+import InMemoryQuestionsRepository from '@/tests/repositories/in-memory-questions-repository'
 import GetQuestionBySlug from '@/domain/forum/application/use-cases/get-question-by-slug'
 import Question from '@/domain/forum/enterprise/entities/question'
 import makeQuestion from '@/tests/factories/make-question'

@@ -1,5 +1,5 @@
-import InMemoryQuestionsRepository from '@/tests/repositories/InMemoryQuestionsRepository'
-import InMemoryAnswersRepository from '@/tests/repositories/InMemoryAnswersRepository'
+import InMemoryQuestionsRepository from '@/tests/repositories/in-memory-questions-repository'
+import InMemoryAnswersRepository from '@/tests/repositories/in-memory-answers-repository'
 import makeQuestion from '@/tests/factories/make-question'
 import makeAnswer from '@/tests/factories/make-answer'
 import ChooseBestQuestionAnswer from '@/domain/forum/application/use-cases/choose-best-question-answer'

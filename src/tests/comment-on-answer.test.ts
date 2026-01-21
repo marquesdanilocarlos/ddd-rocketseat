@@ -1,7 +1,7 @@
 import makeAnswer from '@/tests/factories/make-answer'
 import Answer from '@/domain/forum/enterprise/entities/answer'
-import InMemoryAnswersRepository from '@/tests/repositories/InMemoryAnswersRepository'
-import InMemoryAnswerCommentsRepository from '@/tests/repositories/InMemoryAnswerCommentsRepository'
+import InMemoryAnswersRepository from '@/tests/repositories/in-memory-answers-repository'
+import InMemoryAnswerCommentsRepository from '@/tests/repositories/in-memory-answer-comments-repository'
 import CommentOnAnswer from '@/domain/forum/application/use-cases/comment-on-answer'
 
 describe('Comentários de respostas', () => {

@@ -1,4 +1,4 @@
-import InMemoryAnswersRepository from '@/tests/repositories/InMemoryAnswersRepository'
+import InMemoryAnswersRepository from '@/tests/repositories/in-memory-answers-repository'
 import UniqueEntityId from '@/core/entities/unique-entity-id'
 import Answer from '@/domain/forum/enterprise/entities/answer'
 import makeAnswer from '@/tests/factories/make-answer'

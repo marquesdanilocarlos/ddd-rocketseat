@@ -1,4 +1,4 @@
-import InMemoryAnswerCommentsRepository from '@/tests/repositories/InMemoryAnswerCommentsRepository'
+import InMemoryAnswerCommentsRepository from '@/tests/repositories/in-memory-answer-comments-repository'
 import UniqueEntityId from '@/core/entities/unique-entity-id'
 import AnswerComment from '@/domain/forum/enterprise/entities/answer-comment'
 import makeAnswerComment from '@/tests/factories/make-answer-comment'

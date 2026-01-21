@@ -1,7 +1,7 @@
 import makeQuestion from '@/tests/factories/make-question'
 import Question from '@/domain/forum/enterprise/entities/question'
-import InMemoryQuestionsRepository from '@/tests/repositories/InMemoryQuestionsRepository'
-import InMemoryQuestionCommentsRepository from '@/tests/repositories/InMemoryQuestionCommentsRepository'
+import InMemoryQuestionsRepository from '@/tests/repositories/in-memory-questions-repository'
+import InMemoryQuestionCommentsRepository from '@/tests/repositories/in-memory-question-comments-repository'
 import CommentOnQuestion from '@/domain/forum/application/use-cases/comment-on-question'
 
 describe('Comentários de perguntas', () => {

@@ -7,4 +7,19 @@ export default class InMemoryQuestionCommentsRepository implements QuestionComme
     this.comments.push(questionComment)
     return Promise.resolve(questionComment)
   }
+
+  delete(questionComment: QuestionComment): Promise<void> {
+    const questionCommentIndex = this.comments.findIndex(
+      (comment) => comment.id.value === questionComment.id.value,
+    )
+    this.comments.splice(questionCommentIndex, 1)
+    return Promise.resolve()
+  }
+
+  findById(questionCommentId: string): Promise<QuestionComment | null> {
+    const questionComment =
+      this.comments.find((comment) => comment.id.value === questionCommentId) ??
+      null
+    return Promise.resolve(questionComment)
+  }
 }

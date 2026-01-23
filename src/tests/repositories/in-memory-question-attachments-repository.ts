@@ -11,4 +11,11 @@ export default class InMemoryQuestionAttachmentsRepository implements QuestionAt
 
     return Promise.resolve(questionAttachments)
   }
+
+  deleteManyByQuestionId(questionId: string): Promise<void> {
+    this.attachments = this.attachments.filter(
+      (comment) => comment.questionId.value !== questionId,
+    )
+    return Promise.resolve(undefined)
+  }
 }

@@ -4,14 +4,22 @@ import Question from '@/domain/forum/enterprise/entities/question'
 import makeQuestion from '@/tests/factories/make-question'
 import UniqueEntityId from '@/core/entities/unique-entity-id'
 import { UnauthorizedError } from '@/core/errors'
+import makeQuestionAttachment from '@/tests/factories/make-question-attachments'
+import InMemoryQuestionAttachmentsRepository from '@/tests/repositories/in-memory-question-attachments-repository'
 
 describe('Deleção de pergunta', () => {
   let inMemoryQuestionsRepository: InMemoryQuestionsRepository
+  let inMemoryQuestionAttachmentsRepository: InMemoryQuestionAttachmentsRepository
   let sut: DeleteQuestion
 
   beforeEach(() => {
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
-    sut = new DeleteQuestion(inMemoryQuestionsRepository)
+    inMemoryQuestionAttachmentsRepository =
+      new InMemoryQuestionAttachmentsRepository()
+    sut = new DeleteQuestion(
+      inMemoryQuestionsRepository,
+      inMemoryQuestionAttachmentsRepository,
+    )
   })
 
   it('Deve remover uma pergunta pelo id', async () => {
@@ -19,12 +27,30 @@ describe('Deleção de pergunta', () => {
       { authorId: new UniqueEntityId('author-sinistro') },
       'to-delete-question',
     )
+
     const question = await inMemoryQuestionsRepository.create(newQuestion)
+
+    inMemoryQuestionAttachmentsRepository.attachments.push(
+      makeQuestionAttachment({
+        questionId: question.id,
+        attachmentId: new UniqueEntityId('1'),
+      }),
+    )
+
+    inMemoryQuestionAttachmentsRepository.attachments.push(
+      makeQuestionAttachment({
+        questionId: question.id,
+        attachmentId: new UniqueEntityId('2'),
+      }),
+    )
+
     await sut.execute({
       authorId: question.authorId.value,
       questionId: question.id.value,
     })
+
     expect(inMemoryQuestionsRepository.questions).toHaveLength(0)
+    expect(inMemoryQuestionAttachmentsRepository.attachments).toHaveLength(0)
   })
 
   it('Não deve deletar pergunta se o id do autor for diferente', async () => {

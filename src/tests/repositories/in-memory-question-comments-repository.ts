@@ -1,7 +1,6 @@
 import QuestionCommentsRepository from '@/domain/forum/application/repositories/question-comments-repository'
 import QuestionComment from '@/domain/forum/enterprise/entities/question-comment'
 import PaginationParams from '@/core/types/pagination-params'
-import Answer from '@/domain/forum/enterprise/entities/answer'
 
 export default class InMemoryQuestionCommentsRepository implements QuestionCommentsRepository {
   public comments: QuestionComment[] = []

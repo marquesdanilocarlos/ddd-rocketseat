@@ -57,6 +57,7 @@ export default class EditQuestion {
 
     question.title = title
     question.content = content
+    question.attachments = existentAttachments
 
     await this.questionsRepository.save(question)
 

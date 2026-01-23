@@ -2,6 +2,7 @@ import QuestionsRepository from '@/domain/forum/application/repositories/questio
 import Question from '@/domain/forum/enterprise/entities/question'
 import UniqueEntityId from '@/core/entities/unique-entity-id'
 import QuestionAttachment from '@/domain/forum/enterprise/entities/question-attachment'
+import QuestionAttachmentList from '@/domain/forum/enterprise/entities/value-objects/question-attachment-list'
 
 export type CreateQuestionInput = {
   authorId: string
@@ -26,13 +27,14 @@ export default class CreateQuestion {
       content,
     })
 
-    question.attachments = attachmentsIds.map((attachmentId) => {
+    const questionAttachments = attachmentsIds.map((attachmentId) => {
       return QuestionAttachment.create({
         attachmentId: new UniqueEntityId(attachmentId),
         questionId: question.id,
       })
     })
 
+    question.attachments = new QuestionAttachmentList(questionAttachments)
     await this.questionsRepository.create(question)
 
     return { question }

@@ -23,8 +23,12 @@ describe('Teste de criação de pergunta', () => {
     const { question } = await sut.execute(newQuestionData)
     expect(question.id).toBeTruthy()
     expect(inMemoryQuestionsRepository.questions[0].id).toEqual(question.id)
-    expect(inMemoryQuestionsRepository.questions[0].attachments).toHaveLength(2)
-    expect(inMemoryQuestionsRepository.questions[0].attachments).toEqual([
+    expect(
+      inMemoryQuestionsRepository.questions[0].attachments.getItems(),
+    ).toHaveLength(2)
+    expect(
+      inMemoryQuestionsRepository.questions[0].attachments.getItems(),
+    ).toEqual([
       expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
       expect.objectContaining({ attachmentId: new UniqueEntityId('2') }),
     ])

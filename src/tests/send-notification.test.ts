@@ -12,7 +12,7 @@ describe('Teste de envio de notificação', () => {
     sut = new SendNotification(inMemoryNotificationsRepository)
   })
 
-  it('Deve criar uma nova pergunta', async () => {
+  it('Deve criar uma nova notificação', async () => {
     const newNotificationData: SendNotificationInput = {
       recipientId: '1',
       title: 'Nova notificação',

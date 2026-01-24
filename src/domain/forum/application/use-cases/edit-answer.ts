@@ -1,11 +1,16 @@
 import AnswersRepository from '@/domain/forum/application/repositories/answers-repository'
 import Answer from '@/domain/forum/enterprise/entities/answer'
 import { NotFoundError, UnauthorizedError } from '@/core/errors'
+import UniqueEntityId from '@/core/entities/unique-entity-id'
+import AnswerAttachmentsRepository from '@/domain/forum/application/repositories/answer-attachments-repository'
+import AnswerAttachmentList from '@/domain/forum/enterprise/entities/answer-attachment-list'
+import AnswerAttachment from '@/domain/forum/enterprise/entities/answer-attachment'
 
 type EditAnswerInput = {
   authorId: string
   answerId: string
   content: string
+  attachmentsIds: string[]
 }
 
 type EditAnswerOutput = {
@@ -13,10 +18,13 @@ type EditAnswerOutput = {
 }
 
 export default class EditAnswer {
-  constructor(private answersRepository: AnswersRepository) {}
+  constructor(
+    private answersRepository: AnswersRepository,
+    private answerAttachmentsRepository: AnswerAttachmentsRepository,
+  ) {}
 
   async execute(input: EditAnswerInput): Promise<EditAnswerOutput> {
-    const { authorId, answerId, content } = input
+    const { authorId, answerId, content, attachmentsIds } = input
     const answer = await this.answersRepository.findById(answerId)
 
     if (!answer) {
@@ -31,7 +39,21 @@ export default class EditAnswer {
       )
     }
 
+    const existentAttachmentsIds =
+      await this.answerAttachmentsRepository.findManyByAnswerId(answerId)
+    const existentAttachments = new AnswerAttachmentList(existentAttachmentsIds)
+
+    const attachments = attachmentsIds.map((attachmentId) => {
+      return AnswerAttachment.create({
+        attachmentId: new UniqueEntityId(attachmentId),
+        answerId: answer.id,
+      })
+    })
+
+    existentAttachments.update(attachments)
+
     answer.content = content
+    answer.attachments = existentAttachments
 
     await this.answersRepository.save(answer)
 

@@ -1,5 +1,6 @@
 import AnswersRepository from '@/domain/forum/application/repositories/answers-repository'
 import { NotFoundError, UnauthorizedError } from '@/core/errors'
+import AnswerAttachmentsRepository from '@/domain/forum/application/repositories/answer-attachments-repository'
 
 type DeleteAnswerInput = {
   authorId: string
@@ -7,7 +8,10 @@ type DeleteAnswerInput = {
 }
 
 export default class DeleteAnswer {
-  constructor(private answersRepository: AnswersRepository) {}
+  constructor(
+    private answersRepository: AnswersRepository,
+    private answerAttachmentsRepository: AnswerAttachmentsRepository,
+  ) {}
 
   async execute({ authorId, answerId }: DeleteAnswerInput): Promise<void> {
     const answer = await this.answersRepository.findById(answerId)
@@ -25,5 +29,6 @@ export default class DeleteAnswer {
     }
 
     await this.answersRepository.delete(answer)
+    await this.answerAttachmentsRepository.deleteManyByAnswerId(answerId)
   }
 }

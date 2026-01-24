@@ -2,7 +2,7 @@ import QuestionsRepository from '@/domain/forum/application/repositories/questio
 import Question from '@/domain/forum/enterprise/entities/question'
 import UniqueEntityId from '@/core/entities/unique-entity-id'
 import QuestionAttachment from '@/domain/forum/enterprise/entities/question-attachment'
-import QuestionAttachmentList from '@/domain/forum/enterprise/entities/value-objects/question-attachment-list'
+import QuestionAttachmentList from '@/domain/forum/enterprise/entities/question-attachment-list'
 
 export type CreateQuestionInput = {
   authorId: string

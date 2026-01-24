@@ -3,7 +3,7 @@ import UniqueEntityId from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 import dayjs from 'dayjs'
 import AggregateRoot from '@/core/entities/aggregate-root'
-import QuestionAttachmentList from '@/domain/forum/enterprise/entities/value-objects/question-attachment-list'
+import QuestionAttachmentList from '@/domain/forum/enterprise/entities/question-attachment-list'
 
 export type QuestionProps = {
   authorId: UniqueEntityId

@@ -12,4 +12,12 @@ export default abstract class Entity<Props> {
     this._id = id ?? new UniqueEntityId()
     this.props = props
   }
+
+  public equals(entity: Entity<Props>): boolean {
+    if (entity !== this) {
+      return false
+    }
+
+    return entity.id === this._id
+  }
 }

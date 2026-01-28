@@ -24,7 +24,7 @@ describe('Edição de resposta', () => {
   it('Deve editar uma pergunta pelo id', async () => {
     const newAnswer: Answer = makeAnswer(
       { authorId: new UniqueEntityId('author-sinistro') },
-      'to-edit-answer',
+      new UniqueEntityId('to-edit-answer'),
     )
 
     const answer = await inMemoryAnswersRepository.create(newAnswer)
@@ -55,7 +55,7 @@ describe('Edição de resposta', () => {
   it('Não deve editar resposta se o id do autor for diferente', async () => {
     const newAnswer: Answer = makeAnswer(
       { authorId: new UniqueEntityId('autor-sinistro') },
-      'to-edit-answer',
+      new UniqueEntityId('to-edit-answer'),
     )
     const answer = await inMemoryAnswersRepository.create(newAnswer)
 

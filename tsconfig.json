@@ -11,8 +11,10 @@
     "strict": true,
     "module": "ESNext",
     "types": ["vitest/globals", "node"],
-    "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "outDir": "./dist",       // Pasta onde os arquivos JS compilados serão salvos
+    "rootDir": "./src"
   },
   "include": ["src"]
 }

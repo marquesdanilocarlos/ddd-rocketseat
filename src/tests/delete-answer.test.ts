@@ -25,7 +25,7 @@ describe('Deleção de resposta', () => {
   it('Deve remover uma pergunta pelo id', async () => {
     const newAnswer: Answer = makeAnswer(
       { authorId: new UniqueEntityId('author-sinistro') },
-      'to-delete-answer',
+      new UniqueEntityId('to-delete-answer'),
     )
     const answer = await inMemoryAnswersRepository.create(newAnswer)
 
@@ -55,7 +55,7 @@ describe('Deleção de resposta', () => {
   it('Não deve deletar resposta se o id do autor for diferente', async () => {
     const newAnswer: Answer = makeAnswer(
       { authorId: new UniqueEntityId('autor-sinistro') },
-      'to-delete-answer',
+      new UniqueEntityId('to-delete-answer'),
     )
     const answer = await inMemoryAnswersRepository.create(newAnswer)
 

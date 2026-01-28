@@ -5,7 +5,9 @@
   "scripts": {
     "test": "vitest run",
     "lint": "eslint src --ext .ts",
-    "lint:fix": "eslint src --ext .ts --fix"
+    "lint:fix": "eslint src --ext .ts --fix",
+    "dev": "tsc -w",
+    "start": "node --inspect dist/main.js"
   },
   "keywords": [],
   "author": "",

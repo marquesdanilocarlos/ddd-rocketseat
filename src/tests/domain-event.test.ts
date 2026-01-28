@@ -42,6 +42,6 @@ describe('Eventos de domínio', () => {
     DomainEvents.dispatchEventsForAggregate(aggregate.id)
 
     expect(spy).toHaveBeenCalled()
-    expect(aggregate.domainEvents).toHaveLength(1)
+    expect(aggregate.domainEvents).toHaveLength(0)
   })
 })

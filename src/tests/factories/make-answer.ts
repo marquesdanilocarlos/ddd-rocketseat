@@ -4,7 +4,7 @@ import Answer, { AnswerProps } from '@/domain/forum/enterprise/entities/answer'
 
 export default function makeAnswer(
   override: Partial<AnswerProps> = {},
-  id?: string,
+  id?: UniqueEntityId | undefined,
 ): Answer {
   return Answer.create(
     {
@@ -13,6 +13,6 @@ export default function makeAnswer(
       questionId: new UniqueEntityId(),
       ...override,
     },
-    new UniqueEntityId(id),
+    id,
   )
 }

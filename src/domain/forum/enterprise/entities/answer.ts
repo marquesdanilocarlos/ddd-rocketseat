@@ -58,7 +58,7 @@ export default class Answer extends AggregateRoot<AnswerProps> {
 
   public static create(
     props: Optional<AnswerProps, 'createdAt' | 'attachments'>,
-    id?: UniqueEntityId,
+    id?: UniqueEntityId | undefined,
   ): Answer {
     const answer = new Answer(
       {

@@ -1,6 +1,7 @@
 import AnswersRepository from '@/domain/forum/application/repositories/answers-repository'
 import Answer from '@/domain/forum/enterprise/entities/answer'
 import PaginationParams from '@/core/types/pagination-params'
+import { DomainEvents } from '@/core/events/domain-events'
 
 export default class InMemoryAnswersRepository implements AnswersRepository {
   public answers: Answer[] = []
@@ -12,6 +13,7 @@ export default class InMemoryAnswersRepository implements AnswersRepository {
 
   async create(answer: Answer): Promise<Answer> {
     this.answers.push(answer)
+    DomainEvents.dispatchEventsForAggregate(answer.id)
     return Promise.resolve(answer)
   }
 
@@ -34,6 +36,7 @@ export default class InMemoryAnswersRepository implements AnswersRepository {
     )
 
     this.answers[answerIndex] = answer
+    DomainEvents.dispatchEventsForAggregate(answer.id)
     return Promise.resolve(this.answers[answerIndex])
   }
 

@@ -4,6 +4,7 @@ import { Optional } from '@/core/types/optional'
 import dayjs from 'dayjs'
 import AggregateRoot from '@/core/entities/aggregate-root'
 import QuestionAttachmentList from '@/domain/forum/enterprise/entities/question-attachment-list'
+import QuestionBestAnswerChosenEvent from '@/domain/forum/enterprise/events/question-best-answer-chosen-event'
 
 export type QuestionProps = {
   authorId: UniqueEntityId
@@ -77,7 +78,20 @@ export default class Question extends AggregateRoot<QuestionProps> {
     this.touch()
   }
 
-  set bestAnswerId(bestAnswerId: UniqueEntityId) {
+  set bestAnswerId(bestAnswerId: UniqueEntityId | undefined) {
+    if (bestAnswerId === undefined) {
+      return
+    }
+
+    if (
+      this.props.bestAnswerId === undefined ||
+      !this.props.bestAnswerId.equals(bestAnswerId)
+    ) {
+      this.addDomainEvent(
+        new QuestionBestAnswerChosenEvent(this, bestAnswerId.value),
+      )
+    }
+
     this.props.bestAnswerId = bestAnswerId
     this.touch()
   }

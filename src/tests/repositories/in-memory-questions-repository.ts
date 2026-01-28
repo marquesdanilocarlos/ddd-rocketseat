@@ -2,6 +2,7 @@ import QuestionsRepository from '@/domain/forum/application/repositories/questio
 import Question from '@/domain/forum/enterprise/entities/question'
 import Slug from '@/domain/forum/enterprise/entities/value-objects/slug'
 import PaginationParams from '@/core/types/pagination-params'
+import { DomainEvents } from '@/core/events/domain-events'
 
 export default class InMemoryQuestionsRepository implements QuestionsRepository {
   public questions: Question[] = []
@@ -23,6 +24,7 @@ export default class InMemoryQuestionsRepository implements QuestionsRepository 
 
   async create(question: Question): Promise<Question> {
     this.questions.push(question)
+    DomainEvents.dispatchEventsForAggregate(question.id)
     return Promise.resolve(question)
   }
 
@@ -38,6 +40,7 @@ export default class InMemoryQuestionsRepository implements QuestionsRepository 
     )
 
     this.questions[questionIndex] = question
+    DomainEvents.dispatchEventsForAggregate(question.id)
     return Promise.resolve(this.questions[questionIndex])
   }
 
